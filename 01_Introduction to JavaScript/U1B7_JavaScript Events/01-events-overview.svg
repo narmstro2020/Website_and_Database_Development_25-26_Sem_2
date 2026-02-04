@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="eventGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#c73e54"/>
+    </linearGradient>
+    <linearGradient id="userGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecca3"/>
+      <stop offset="100%" style="stop-color:#3db389"/>
+    </linearGradient>
+    <linearGradient id="browserGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffc107"/>
+      <stop offset="100%" style="stop-color:#e5ad06"/>
+    </linearGradient>
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7b68ee"/>
+      <stop offset="100%" style="stop-color:#6a5acd"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f0f1a"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1a2e" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="100" fill="url(#headerGrad)"/>
+  <text x="600" y="60" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#e94560" text-anchor="middle">JavaScript Events</text>
+  <text x="600" y="88" font-family="Consolas, monospace" font-size="18" fill="#8892b0" text-anchor="middle">Making Web Pages Interactive</text>
+  
+  <!-- Central Event Concept -->
+  <g transform="translate(600, 280)">
+    <circle cx="0" cy="0" r="100" fill="url(#eventGrad)" filter="url(#shadow)"/>
+    <text x="0" y="-15" font-family="Georgia, serif" font-size="28" fill="white" text-anchor="middle" font-weight="bold">EVENT</text>
+    <text x="0" y="15" font-family="Consolas, monospace" font-size="14" fill="#ffd6e0" text-anchor="middle">"Something</text>
+    <text x="0" y="35" font-family="Consolas, monospace" font-size="14" fill="#ffd6e0" text-anchor="middle">happened!"</text>
+  </g>
+  
+  <!-- User Action -->
+  <g transform="translate(250, 220)">
+    <rect x="-110" y="-60" width="220" height="120" rx="15" fill="url(#userGrad)" filter="url(#shadow)"/>
+    <text x="0" y="-25" font-family="Georgia, serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold">User Action</text>
+    <text x="0" y="5" font-family="Consolas, monospace" font-size="14" fill="#d4f5e9" text-anchor="middle">click, keypress,</text>
+    <text x="0" y="25" font-family="Consolas, monospace" font-size="14" fill="#d4f5e9" text-anchor="middle">scroll, submit...</text>
+    <!-- Arrow to Event -->
+    <line x1="115" y1="0" x2="165" y2="30" stroke="#4ecca3" stroke-width="4" marker-end="url(#arrowGreen)"/>
+  </g>
+  
+  <!-- Browser Action -->
+  <g transform="translate(950, 220)">
+    <rect x="-110" y="-60" width="220" height="120" rx="15" fill="url(#browserGrad)" filter="url(#shadow)"/>
+    <text x="0" y="-25" font-family="Georgia, serif" font-size="22" fill="#1a1a2e" text-anchor="middle" font-weight="bold">Browser Action</text>
+    <text x="0" y="5" font-family="Consolas, monospace" font-size="14" fill="#5c4a00" text-anchor="middle">load, resize,</text>
+    <text x="0" y="25" font-family="Consolas, monospace" font-size="14" fill="#5c4a00" text-anchor="middle">error, focus...</text>
+    <!-- Arrow to Event -->
+    <line x1="-115" y1="0" x2="-165" y2="30" stroke="#ffc107" stroke-width="4"/>
+  </g>
+  
+  <!-- Your Code Response -->
+  <g transform="translate(600, 480)">
+    <rect x="-140" y="-50" width="280" height="100" rx="15" fill="url(#codeGrad)" filter="url(#shadow)"/>
+    <text x="0" y="-15" font-family="Georgia, serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold">Your Code Responds</text>
+    <text x="0" y="15" font-family="Consolas, monospace" font-size="14" fill="#e0dcf5" text-anchor="middle">Event Handler / Listener</text>
+    <text x="0" y="35" font-family="Consolas, monospace" font-size="14" fill="#e0dcf5" text-anchor="middle">runs your function</text>
+    <!-- Arrow from Event -->
+    <line x1="0" y1="-55" x2="0" y2="-95" stroke="#7b68ee" stroke-width="4"/>
+  </g>
+  
+  <!-- Flow arrows -->
+  <defs>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4ecca3"/>
+    </marker>
+    <marker id="arrowYellow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ffc107"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7b68ee"/>
+    </marker>
+  </defs>
+  
+  <!-- Key Concept Box -->
+  <g transform="translate(100, 600)">
+    <rect x="0" y="0" width="480" height="250" rx="15" fill="#1a1a2e" stroke="#e94560" stroke-width="2" filter="url(#shadow)"/>
+    <text x="240" y="40" font-family="Georgia, serif" font-size="24" fill="#e94560" text-anchor="middle" font-weight="bold">The Event-Driven Model</text>
+    <line x1="40" y1="55" x2="440" y2="55" stroke="#e94560" stroke-width="1" opacity="0.5"/>
+    
+    <text x="30" y="90" font-family="Consolas, monospace" font-size="16" fill="#8892b0">1.</text>
+    <text x="55" y="90" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Something happens (the event)</text>
+    
+    <text x="30" y="125" font-family="Consolas, monospace" font-size="16" fill="#8892b0">2.</text>
+    <text x="55" y="125" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Browser creates an Event object</text>
+    
+    <text x="30" y="160" font-family="Consolas, monospace" font-size="16" fill="#8892b0">3.</text>
+    <text x="55" y="160" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Browser finds registered listeners</text>
+    
+    <text x="30" y="195" font-family="Consolas, monospace" font-size="16" fill="#8892b0">4.</text>
+    <text x="55" y="195" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Your callback function executes</text>
+    
+    <text x="30" y="230" font-family="Consolas, monospace" font-size="16" fill="#8892b0">5.</text>
+    <text x="55" y="230" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Page updates based on your code</text>
+  </g>
+  
+  <!-- Why Events Matter Box -->
+  <g transform="translate(620, 600)">
+    <rect x="0" y="0" width="480" height="250" rx="15" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+    <text x="240" y="40" font-family="Georgia, serif" font-size="24" fill="#4ecca3" text-anchor="middle" font-weight="bold">Why Events Matter</text>
+    <line x1="40" y1="55" x2="440" y2="55" stroke="#4ecca3" stroke-width="1" opacity="0.5"/>
+    
+    <circle cx="45" cy="90" r="8" fill="#4ecca3"/>
+    <text x="65" y="95" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Create interactive user interfaces</text>
+    
+    <circle cx="45" cy="130" r="8" fill="#4ecca3"/>
+    <text x="65" y="135" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Respond to user input in real-time</text>
+    
+    <circle cx="45" cy="170" r="8" fill="#4ecca3"/>
+    <text x="65" y="175" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Validate forms before submission</text>
+    
+    <circle cx="45" cy="210" r="8" fill="#4ecca3"/>
+    <text x="65" y="215" font-family="Georgia, serif" font-size="16" fill="#ccd6f6">Build games and animations</text>
+  </g>
+</svg>

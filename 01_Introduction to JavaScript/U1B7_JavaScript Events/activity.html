@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Card Game - JS Events Activity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+            color: #ccd6f6;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            color: #4ecca3;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat {
+            background: #1a1a2e;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #2d2d44;
+        }
+
+        .stat label {
+            color: #8892b0;
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .stat span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffc107;
+        }
+
+        #timer {
+            color: #e94560;
+        }
+
+        /* Game Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .controls button {
+            padding: 10px 24px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+
+        .controls button:hover {
+            opacity: 0.9;
+        }
+
+        .controls button:active {
+            transform: scale(0.95);
+        }
+
+        #start-btn {
+            background: #4ecca3;
+            color: #1a1a2e;
+        }
+
+        #reset-btn {
+            background: #e94560;
+            color: white;
+        }
+
+        #difficulty {
+            padding: 10px;
+            font-size: 1rem;
+            background: #2d2d44;
+            color: #ccd6f6;
+            border: 2px solid #4ecca3;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Game Board */
+        .game-board {
+            display: grid;
+            gap: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            background: #1a1a2e;
+            border-radius: 16px;
+            border: 2px solid #2d2d44;
+        }
+
+        /* Grid layouts for different difficulties */
+        .game-board.easy {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .game-board.medium {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .game-board.hard {
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        /* Card Styles */
+        .card {
+            aspect-ratio: 1;
+            background: linear-gradient(145deg, #2d2d44, #1f1f35);
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transition: transform 0.3s, background 0.3s;
+            user-select: none;
+            border: 2px solid #3d3d5c;
+        }
+
+        .card:hover:not(.flipped):not(.matched) {
+            transform: scale(1.05);
+            border-color: #4ecca3;
+        }
+
+        .card .card-back {
+            color: #4ecca3;
+            font-size: 1.5rem;
+        }
+
+        .card .card-front {
+            display: none;
+        }
+
+        .card.flipped {
+            background: linear-gradient(145deg, #4ecca3, #3db389);
+            transform: rotateY(180deg);
+        }
+
+        .card.flipped .card-back {
+            display: none;
+        }
+
+        .card.flipped .card-front {
+            display: block;
+            transform: rotateY(180deg);
+        }
+
+        .card.matched {
+            background: linear-gradient(145deg, #ffc107, #e5ad06);
+            cursor: default;
+            animation: matchPulse 0.5s ease;
+        }
+
+        @keyframes matchPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Win Message */
+        #win-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a2e;
+            padding: 2rem 3rem;
+            border-radius: 16px;
+            border: 3px solid #4ecca3;
+            text-align: center;
+            z-index: 100;
+            box-shadow: 0 0 50px rgba(78, 204, 163, 0.3);
+        }
+
+        #win-message h2 {
+            color: #4ecca3;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        #win-message p {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #win-message button {
+            margin-top: 1rem;
+            padding: 12px 30px;
+            font-size: 1rem;
+            background: #4ecca3;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        #win-message.show {
+            display: block;
+        }
+
+        /* Instructions */
+        .instructions {
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            padding: 1rem;
+            background: #1a1a2e;
+            border-radius: 12px;
+            border-left: 4px solid #7b68ee;
+        }
+
+        .instructions h3 {
+            color: #7b68ee;
+            margin-bottom: 0.5rem;
+        }
+
+        .instructions p {
+            color: #8892b0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🧠 Memory Card Game</h1>
+        <div class="game-info">
+            <div class="stat">
+                <label>Moves</label>
+                <span id="moves">0</span>
+            </div>
+            <div class="stat">
+                <label>Matches</label>
+                <span id="matches">0</span>
+            </div>
+            <div class="stat">
+                <label>Time</label>
+                <span id="timer">0:00</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="controls">
+        <select id="difficulty">
+            <option value="easy">Easy (8 cards)</option>
+            <option value="medium" selected>Medium (12 cards)</option>
+            <option value="hard">Hard (18 cards)</option>
+        </select>
+        <button id="start-btn">Start Game</button>
+        <button id="reset-btn">Reset</button>
+    </div>
+
+    <div class="game-board medium" id="game-board">
+        <!-- Cards will be generated by JavaScript -->
+        <div class="placeholder" style="grid-column: span 4; text-align: center; padding: 3rem; color: #8892b0;">
+            Click "Start Game" to begin!
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div id="win-message">
+        <h2>🎉 You Won!</h2>
+        <p>Moves: <span id="final-moves">0</span></p>
+        <p>Time: <span id="final-time">0:00</span></p>
+        <button id="play-again-btn">Play Again</button>
+    </div>
+
+    <div class="instructions">
+        <h3>📋 Your Task</h3>
+        <p>
+            Complete the <code>activity.js</code> file to make this memory game work! 
+            You'll implement click handlers, game logic, and use event delegation.
+            Check the TODO comments in the JS file for guidance.
+        </p>
+    </div>
+
+    <script src="activity.js"></script>
+</body>
+</html>

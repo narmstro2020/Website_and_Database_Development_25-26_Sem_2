@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Events - Guided Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #ccd6f6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4ecca3;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8892b0;
+            margin-bottom: 2rem;
+        }
+
+        .demo-section {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2d2d44;
+        }
+
+        .demo-section h2 {
+            color: #e94560;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demo-section h2::before {
+            content: "▸";
+            color: #4ecca3;
+        }
+
+        .demo-area {
+            background: #0f0f1a;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        /* Demo 1: Basic Click */
+        #demo1-btn {
+            background: #4ecca3;
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        #demo1-btn:hover {
+            background: #3db389;
+        }
+
+        #demo1-btn:active {
+            transform: scale(0.95);
+        }
+
+        #demo1-output {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: #2d2d44;
+            border-radius: 4px;
+            min-height: 40px;
+        }
+
+        /* Demo 2: Multiple Events */
+        #demo2-box {
+            width: 200px;
+            height: 200px;
+            background: #7b68ee;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #demo2-log {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: #2d2d44;
+            border-radius: 4px;
+            max-height: 120px;
+            overflow-y: auto;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Demo 3: Keyboard Events */
+        #demo3-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            background: #2d2d44;
+            border: 2px solid #4ecca3;
+            border-radius: 8px;
+            color: #ccd6f6;
+            outline: none;
+        }
+
+        #demo3-input:focus {
+            border-color: #e94560;
+        }
+
+        #demo3-display {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .key-info {
+            background: #2d2d44;
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .key-info label {
+            display: block;
+            font-size: 0.8rem;
+            color: #8892b0;
+            margin-bottom: 0.25rem;
+        }
+
+        .key-info span {
+            font-family: 'Consolas', monospace;
+            color: #ffc107;
+            font-size: 1.1rem;
+        }
+
+        /* Demo 4: Form Events */
+        #demo4-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #demo4-form input[type="text"],
+        #demo4-form input[type="email"] {
+            padding: 10px;
+            background: #2d2d44;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            color: #ccd6f6;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        #demo4-form input:focus {
+            outline: none;
+            border-color: #4ecca3;
+        }
+
+        #demo4-form input.error {
+            border-color: #e94560;
+        }
+
+        #demo4-form input.valid {
+            border-color: #4ecca3;
+        }
+
+        #demo4-form button {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #demo4-form button:hover {
+            background: #d13a54;
+        }
+
+        #demo4-output {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: #2d2d44;
+            border-radius: 4px;
+            min-height: 40px;
+        }
+
+        /* Demo 5: Event Delegation */
+        #demo5-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        #demo5-list li {
+            background: #2d2d44;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        #demo5-list li:hover {
+            background: #3d3d5c;
+        }
+
+        #demo5-list .delete-btn {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #demo5-add {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #demo5-add input {
+            flex: 1;
+            padding: 10px;
+            background: #2d2d44;
+            border: 2px solid #4ecca3;
+            border-radius: 6px;
+            color: #ccd6f6;
+        }
+
+        #demo5-add button {
+            background: #4ecca3;
+            color: #1a1a2e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .instructions {
+            background: #2d2d44;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            font-size: 0.9rem;
+            color: #8892b0;
+        }
+
+        .instructions code {
+            background: #1a1a2e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #4ecca3;
+        }
+
+        /* Code Snippets */
+        .code-snippet {
+            background: #0a0a12;
+            border: 1px solid #2d2d44;
+            border-radius: 8px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .code-snippet-header {
+            background: #2d2d44;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            color: #8892b0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-snippet-header span {
+            color: #4ecca3;
+            font-weight: bold;
+        }
+
+        .code-snippet pre {
+            margin: 0;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .code-snippet code {
+            color: #ccd6f6;
+        }
+
+        /* Syntax highlighting */
+        .kw { color: #c792ea; }  /* keywords */
+        .fn { color: #82aaff; }  /* functions */
+        .str { color: #c3e88d; } /* strings */
+        .cm { color: #546e7a; }  /* comments */
+        .num { color: #f78c6c; } /* numbers */
+        .op { color: #89ddff; }  /* operators */
+        .prop { color: #ffcb6b; } /* properties */
+    </style>
+</head>
+<body>
+    <h1>🎯 JavaScript Events</h1>
+    <p class="subtitle">Guided Notes - Follow Along!</p>
+
+    <!-- Demo 1: Basic Click Event -->
+    <section class="demo-section">
+        <h2>Demo 1: Basic Click Event</h2>
+        <p class="instructions">
+            The simplest event - clicking a button. We use <code>addEventListener()</code> to listen for clicks.
+        </p>
+        <div class="demo-area">
+            <button id="demo1-btn">Click Me!</button>
+            <div id="demo1-output">Click the button to see the result...</div>
+        </div>
+        <div class="code-snippet">
+            <div class="code-snippet-header"><span>JavaScript</span></div>
+            <pre><code><span class="cm">// Select the element</span>
+<span class="kw">const</span> btn = document.<span class="fn">querySelector</span>(<span class="str">'#demo1-btn'</span>);
+
+<span class="cm">// Add an event listener</span>
+btn.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, () => {
+    <span class="cm">// This code runs when clicked!</span>
+    console.<span class="fn">log</span>(<span class="str">'Button was clicked!'</span>);
+});</code></pre>
+        </div>
+    </section>
+
+    <!-- Demo 2: Multiple Mouse Events -->
+    <section class="demo-section">
+        <h2>Demo 2: Multiple Mouse Events</h2>
+        <p class="instructions">
+            Elements can listen for many event types! Try <code>mouseenter</code>, <code>mouseleave</code>, and <code>click</code>.
+        </p>
+        <div class="demo-area">
+            <div id="demo2-box">Hover & Click Me!</div>
+            <div id="demo2-log"></div>
+        </div>
+        <div class="code-snippet">
+            <div class="code-snippet-header"><span>JavaScript</span></div>
+            <pre><code><span class="kw">const</span> box = document.<span class="fn">querySelector</span>(<span class="str">'#demo2-box'</span>);
+
+<span class="cm">// Same element, different events!</span>
+box.<span class="fn">addEventListener</span>(<span class="str">'mouseenter'</span>, () => {
+    box.<span class="prop">style</span>.<span class="prop">background</span> = <span class="str">'#4ecca3'</span>;
+});
+
+box.<span class="fn">addEventListener</span>(<span class="str">'mouseleave'</span>, () => {
+    box.<span class="prop">style</span>.<span class="prop">background</span> = <span class="str">'#7b68ee'</span>;
+});
+
+box.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, () => {
+    console.<span class="fn">log</span>(<span class="str">'Clicked!'</span>);
+});</code></pre>
+        </div>
+    </section>
+
+    <!-- Demo 3: Keyboard Events -->
+    <section class="demo-section">
+        <h2>Demo 3: Keyboard Events</h2>
+        <p class="instructions">
+            The <code>event</code> object contains info about what happened. For keyboards, check <code>event.key</code> and <code>event.code</code>.
+        </p>
+        <div class="demo-area">
+            <input type="text" id="demo3-input" placeholder="Type something here...">
+            <div id="demo3-display">
+                <div class="key-info">
+                    <label>event.key</label>
+                    <span id="key-value">-</span>
+                </div>
+                <div class="key-info">
+                    <label>event.code</label>
+                    <span id="code-value">-</span>
+                </div>
+                <div class="key-info">
+                    <label>Shift held?</label>
+                    <span id="shift-value">-</span>
+                </div>
+            </div>
+        </div>
+        <div class="code-snippet">
+            <div class="code-snippet-header"><span>JavaScript</span></div>
+            <pre><code><span class="kw">const</span> input = document.<span class="fn">querySelector</span>(<span class="str">'#demo3-input'</span>);
+
+<span class="cm">// The callback receives an 'event' object!</span>
+input.<span class="fn">addEventListener</span>(<span class="str">'keydown'</span>, (<span class="prop">event</span>) => {
+    console.<span class="fn">log</span>(<span class="prop">event</span>.<span class="prop">key</span>);      <span class="cm">// "a", "Enter", "ArrowUp"</span>
+    console.<span class="fn">log</span>(<span class="prop">event</span>.<span class="prop">code</span>);     <span class="cm">// "KeyA", "Enter", "ArrowUp"</span>
+    console.<span class="fn">log</span>(<span class="prop">event</span>.<span class="prop">shiftKey</span>); <span class="cm">// true or false</span>
+    
+    <span class="cm">// Check for specific keys</span>
+    <span class="kw">if</span> (<span class="prop">event</span>.<span class="prop">key</span> === <span class="str">'Enter'</span>) {
+        console.<span class="fn">log</span>(<span class="str">'User pressed Enter!'</span>);
+    }
+});</code></pre>
+        </div>
+    </section>
+
+    <!-- Demo 4: Form Events & preventDefault -->
+    <section class="demo-section">
+        <h2>Demo 4: Form Submit & preventDefault()</h2>
+        <p class="instructions">
+            Forms try to refresh the page by default. Use <code>event.preventDefault()</code> to stop that and handle data with JavaScript!
+        </p>
+        <div class="demo-area">
+            <form id="demo4-form">
+                <input type="text" name="username" placeholder="Enter your name" required>
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Submit Form</button>
+            </form>
+            <div id="demo4-output">Form data will appear here...</div>
+        </div>
+        <div class="code-snippet">
+            <div class="code-snippet-header"><span>JavaScript</span></div>
+            <pre><code><span class="kw">const</span> form = document.<span class="fn">querySelector</span>(<span class="str">'#demo4-form'</span>);
+
+form.<span class="fn">addEventListener</span>(<span class="str">'submit'</span>, (<span class="prop">event</span>) => {
+    <span class="cm">// STOP the page from refreshing!</span>
+    <span class="prop">event</span>.<span class="fn">preventDefault</span>();
+    
+    <span class="cm">// Now handle the form data with JS</span>
+    <span class="kw">const</span> formData = <span class="kw">new</span> <span class="fn">FormData</span>(<span class="prop">event</span>.<span class="prop">target</span>);
+    <span class="kw">const</span> username = formData.<span class="fn">get</span>(<span class="str">'username'</span>);
+    <span class="kw">const</span> email = formData.<span class="fn">get</span>(<span class="str">'email'</span>);
+    
+    console.<span class="fn">log</span>(<span class="str">'Submitted:'</span>, username, email);
+});</code></pre>
+        </div>
+    </section>
+
+    <!-- Demo 5: Event Delegation -->
+    <section class="demo-section">
+        <h2>Demo 5: Event Delegation</h2>
+        <p class="instructions">
+            Instead of adding listeners to every button, we add ONE listener to the parent. Use <code>event.target</code> to see what was clicked!
+        </p>
+        <div class="demo-area">
+            <ul id="demo5-list">
+                <li>
+                    <span>Learn HTML</span>
+                    <button class="delete-btn">Delete</button>
+                </li>
+                <li>
+                    <span>Learn CSS</span>
+                    <button class="delete-btn">Delete</button>
+                </li>
+                <li>
+                    <span>Learn JavaScript</span>
+                    <button class="delete-btn">Delete</button>
+                </li>
+            </ul>
+            <div id="demo5-add">
+                <input type="text" id="demo5-input" placeholder="Add new item...">
+                <button id="demo5-add-btn">Add</button>
+            </div>
+        </div>
+        <div class="code-snippet">
+            <div class="code-snippet-header"><span>HTML</span></div>
+            <pre><code><span class="cm">&lt;!-- The parent element we'll listen on --&gt;</span>
+&lt;<span class="kw">ul</span> <span class="prop">id</span>=<span class="str">"demo5-list"</span>&gt;
+    &lt;<span class="kw">li</span>&gt;
+        &lt;<span class="kw">span</span>&gt;Learn HTML&lt;/<span class="kw">span</span>&gt;
+        &lt;<span class="kw">button</span> <span class="prop">class</span>=<span class="str">"delete-btn"</span>&gt;Delete&lt;/<span class="kw">button</span>&gt;
+    &lt;/<span class="kw">li</span>&gt;
+    <span class="cm">&lt;!-- More items... --&gt;</span>
+&lt;/<span class="kw">ul</span>&gt;</code></pre>
+        </div>
+        <div class="code-snippet">
+            <div class="code-snippet-header"><span>JavaScript</span> — Event Delegation Pattern</div>
+            <pre><code><span class="kw">const</span> list = document.<span class="fn">querySelector</span>(<span class="str">'#demo5-list'</span>);
+
+<span class="cm">// ONE listener on the parent catches ALL child clicks!</span>
+list.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, (<span class="prop">event</span>) => {
+    <span class="cm">// event.target = the actual element clicked</span>
+    <span class="cm">// event.currentTarget = the element with the listener (the ul)</span>
+    
+    <span class="cm">// Check: was it a delete button?</span>
+    <span class="kw">if</span> (<span class="prop">event</span>.<span class="prop">target</span>.<span class="fn">matches</span>(<span class="str">'.delete-btn'</span>)) {
+        <span class="cm">// Find the parent &lt;li&gt; and remove it</span>
+        <span class="kw">const</span> listItem = <span class="prop">event</span>.<span class="prop">target</span>.<span class="fn">closest</span>(<span class="str">'li'</span>);
+        listItem.<span class="fn">remove</span>();
+    }
+});
+
+<span class="cm">// ✅ This works for NEW items added later!</span>
+<span class="cm">// No need to attach listeners to each new button.</span></code></pre>
+        </div>
+        <div class="code-snippet">
+            <div class="code-snippet-header"><span>Key Methods</span></div>
+            <pre><code><span class="prop">event</span>.<span class="prop">target</span>           <span class="cm">// Element that was actually clicked</span>
+<span class="prop">event</span>.<span class="prop">currentTarget</span>    <span class="cm">// Element with the event listener</span>
+.<span class="fn">matches</span>(<span class="str">'selector'</span>)  <span class="cm">// Does element match this CSS selector?</span>
+.<span class="fn">closest</span>(<span class="str">'selector'</span>)  <span class="cm">// Find nearest ancestor matching selector</span></code></pre>
+        </div>
+    </section>
+
+    <script>
+/**
+ * ============================================
+ * JavaScript Events - Guided Notes
+ * ============================================
+ * Follow along as we explore how to make
+ * web pages interactive with events!
+ */
+
+// ============================================
+// DEMO 1: Basic Click Event
+// ============================================
+// The most common event - clicking a button!
+// 
+// SYNTAX: element.addEventListener('eventType', callbackFunction)
+// 
+// The callback function runs WHEN the event happens,
+// not immediately when the code loads.
+
+const demo1Btn = document.querySelector('#demo1-btn');
+const demo1Output = document.querySelector('#demo1-output');
+
+// Keep track of how many times clicked
+let clickCount = 0;
+
+// Using an arrow function as the callback
+demo1Btn.addEventListener('click', () => {
+    clickCount++;
+    demo1Output.textContent = `Button clicked ${clickCount} time(s)! 🎉`;
+    
+    // Change button text after multiple clicks
+    if (clickCount >= 5) {
+        demo1Btn.textContent = "You're a clicking pro!";
+    }
+});
+
+
+// ============================================
+// DEMO 2: Multiple Mouse Events
+// ============================================
+// One element can listen for MANY different events!
+// Let's see mouseenter, mouseleave, and click in action.
+
+const demo2Box = document.querySelector('#demo2-box');
+const demo2Log = document.querySelector('#demo2-log');
+
+// Helper function to add messages to the log
+function logEvent(message, color = '#ccd6f6') {
+    const time = new Date().toLocaleTimeString();
+    demo2Log.innerHTML += `<div style="color: ${color}">[${time}] ${message}</div>`;
+    // Auto-scroll to bottom
+    demo2Log.scrollTop = demo2Log.scrollHeight;
+}
+
+// Mouse enters the element
+demo2Box.addEventListener('mouseenter', () => {
+    demo2Box.style.background = '#4ecca3';
+    demo2Box.textContent = 'Mouse is inside!';
+    logEvent('mouseenter - Mouse entered the box', '#4ecca3');
+});
+
+// Mouse leaves the element
+demo2Box.addEventListener('mouseleave', () => {
+    demo2Box.style.background = '#7b68ee';
+    demo2Box.textContent = 'Hover & Click Me!';
+    logEvent('mouseleave - Mouse left the box', '#e94560');
+});
+
+// Click on the element
+demo2Box.addEventListener('click', () => {
+    logEvent('click - Box was clicked!', '#ffc107');
+});
+
+
+// ============================================
+// DEMO 3: Keyboard Events & The Event Object
+// ============================================
+// When an event happens, the browser creates an "event object"
+// containing information about what happened.
+// 
+// We access it by adding a parameter to our callback function!
+// Common names: event, e, evt
+
+const demo3Input = document.querySelector('#demo3-input');
+const keyValue = document.querySelector('#key-value');
+const codeValue = document.querySelector('#code-value');
+const shiftValue = document.querySelector('#shift-value');
+
+// 'keydown' fires when ANY key is pressed
+demo3Input.addEventListener('keydown', (event) => {
+    // event.key = the character or key name ("a", "Enter", "ArrowUp")
+    keyValue.textContent = event.key;
+    
+    // event.code = the physical key ("KeyA", "Enter", "ArrowUp")
+    codeValue.textContent = event.code;
+    
+    // event.shiftKey = boolean, true if Shift was held
+    shiftValue.textContent = event.shiftKey ? 'Yes!' : 'No';
+    
+    // Fun: Change input border color based on key
+    if (event.key === 'Enter') {
+        demo3Input.style.borderColor = '#4ecca3';
+    } else if (event.key === 'Escape') {
+        demo3Input.value = ''; // Clear the input
+        demo3Input.style.borderColor = '#e94560';
+    }
+});
+
+// Reset border color when user types normally
+demo3Input.addEventListener('input', () => {
+    demo3Input.style.borderColor = '#4ecca3';
+});
+
+
+// ============================================
+// DEMO 4: Form Events & preventDefault()
+// ============================================
+// When a form submits, the browser's DEFAULT behavior
+// is to refresh the page and send data to a server.
+// 
+// We use event.preventDefault() to STOP that default
+// behavior so we can handle the form with JavaScript!
+
+const demo4Form = document.querySelector('#demo4-form');
+const demo4Output = document.querySelector('#demo4-output');
+
+demo4Form.addEventListener('submit', (event) => {
+    // IMPORTANT: Stop the page from refreshing!
+    event.preventDefault();
+    
+    // event.target is the form element itself
+    // We can get form data using FormData or directly accessing inputs
+    const formData = new FormData(event.target);
+    
+    // Get the values
+    const username = formData.get('username');
+    const email = formData.get('email');
+    
+    // Display the submitted data
+    demo4Output.innerHTML = `
+        <strong style="color: #4ecca3">Form Submitted! ✅</strong><br>
+        Name: ${username}<br>
+        Email: ${email}
+    `;
+    
+    // Optional: Clear the form after submission
+    event.target.reset();
+});
+
+// BONUS: Real-time validation using 'input' event
+const emailInput = demo4Form.querySelector('input[type="email"]');
+
+emailInput.addEventListener('input', (event) => {
+    const value = event.target.value;
+    
+    // Simple email check (contains @ and .)
+    if (value.includes('@') && value.includes('.')) {
+        event.target.classList.remove('error');
+        event.target.classList.add('valid');
+    } else if (value.length > 0) {
+        event.target.classList.remove('valid');
+        event.target.classList.add('error');
+    } else {
+        event.target.classList.remove('valid', 'error');
+    }
+});
+
+
+// ============================================
+// DEMO 5: Event Delegation
+// ============================================
+// Problem: If we add new elements dynamically,
+// they won't have event listeners attached!
+// 
+// Solution: Add ONE listener to a parent element.
+// Events "bubble up" from children to parents,
+// so the parent will catch events from all children.
+// 
+// Use event.target to see what was ACTUALLY clicked.
+
+const demo5List = document.querySelector('#demo5-list');
+const demo5Input = document.querySelector('#demo5-input');
+const demo5AddBtn = document.querySelector('#demo5-add-btn');
+
+// ONE event listener on the parent <ul>
+// This will catch clicks on ANY child element!
+demo5List.addEventListener('click', (event) => {
+    // Check if what was clicked is a delete button
+    // .matches() checks if element matches a CSS selector
+    if (event.target.matches('.delete-btn')) {
+        // event.target is the button
+        // .closest() finds the nearest ancestor matching selector
+        const listItem = event.target.closest('li');
+        
+        // Remove the list item with a fade animation
+        listItem.style.opacity = '0';
+        listItem.style.transform = 'translateX(50px)';
+        listItem.style.transition = 'all 0.3s';
+        
+        // Actually remove after animation
+        setTimeout(() => {
+            listItem.remove();
+        }, 300);
+    }
+});
+
+// Add new items - these will ALSO work with our delegation!
+demo5AddBtn.addEventListener('click', () => {
+    const text = demo5Input.value.trim();
+    
+    if (text) {
+        // Create new list item
+        const newItem = document.createElement('li');
+        newItem.innerHTML = `
+            <span>${text}</span>
+            <button class="delete-btn">Delete</button>
+        `;
+        
+        // Add to list
+        demo5List.appendChild(newItem);
+        
+        // Clear input
+        demo5Input.value = '';
+        demo5Input.focus();
+    }
+});
+
+// Allow pressing Enter to add items
+demo5Input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        demo5AddBtn.click(); // Trigger the add button's click
+    }
+});
+    </script>
+</body>
+</html>

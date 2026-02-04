@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="headerGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="objGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9f43"/>
+      <stop offset="100%" style="stop-color:#ee7b30"/>
+    </linearGradient>
+    <filter id="shadow3" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f0f1a"/>
+  
+  <!-- Subtle pattern -->
+  <pattern id="circuit" width="100" height="100" patternUnits="userSpaceOnUse">
+    <path d="M25 0 L25 25 L0 25" fill="none" stroke="#1a1a2e" stroke-width="1"/>
+    <circle cx="25" cy="25" r="3" fill="#1a1a2e"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#circuit)" opacity="0.3"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="100" fill="url(#headerGrad3)"/>
+  <text x="600" y="60" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#ff9f43" text-anchor="middle">The Event Object</text>
+  <text x="600" y="88" font-family="Consolas, monospace" font-size="18" fill="#8892b0" text-anchor="middle">Information About What Happened</text>
+  
+  <!-- Central concept -->
+  <g transform="translate(100, 130)">
+    <rect x="0" y="0" width="480" height="180" rx="15" fill="#1a1a2e" stroke="#ff9f43" stroke-width="2" filter="url(#shadow3)"/>
+    <text x="240" y="40" font-family="Georgia, serif" font-size="22" fill="#ff9f43" text-anchor="middle" font-weight="bold">The Browser Gives You Info</text>
+    <line x1="40" y1="55" x2="440" y2="55" stroke="#ff9f43" stroke-width="1" opacity="0.5"/>
+    
+    <text x="25" y="90" font-family="Consolas, monospace" font-size="16" fill="#89ddff">btn</text>
+    <text x="55" y="90" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">.</text>
+    <text x="65" y="90" font-family="Consolas, monospace" font-size="16" fill="#ffc107">addEventListener</text>
+    <text x="220" y="90" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">(</text>
+    <text x="230" y="90" font-family="Consolas, monospace" font-size="16" fill="#c3e88d">'click'</text>
+    <text x="300" y="90" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">,</text>
+    <text x="315" y="90" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">(</text>
+    <text x="325" y="90" font-family="Consolas, monospace" font-size="16" fill="#ff9f43" font-weight="bold">event</text>
+    <text x="380" y="90" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">)</text>
+    <text x="395" y="90" font-family="Consolas, monospace" font-size="16" fill="#89ddff">=&gt;</text>
+    <text x="425" y="90" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">{</text>
+    
+    <text x="45" y="120" font-family="Consolas, monospace" font-size="16" fill="#82aaff">console</text>
+    <text x="115" y="120" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">.</text>
+    <text x="125" y="120" font-family="Consolas, monospace" font-size="16" fill="#82aaff">log</text>
+    <text x="160" y="120" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">(</text>
+    <text x="170" y="120" font-family="Consolas, monospace" font-size="16" fill="#ff9f43">event</text>
+    <text x="220" y="120" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">);</text>
+    <text x="260" y="120" font-family="Consolas, monospace" font-size="14" fill="#8892b0">// See all properties!</text>
+    
+    <text x="25" y="150" font-family="Consolas, monospace" font-size="16" fill="#ccd6f6">});</text>
+    
+    <text x="240" y="172" font-family="Georgia, serif" font-size="13" fill="#8892b0" text-anchor="middle">Common names: event, e, evt</text>
+  </g>
+  
+  <!-- Arrow pointing to properties -->
+  <g transform="translate(580, 200)">
+    <path d="M0,20 L40,20 L30,10 M40,20 L30,30" stroke="#ff9f43" stroke-width="3" fill="none"/>
+  </g>
+  
+  <!-- Key Properties Box -->
+  <g transform="translate(620, 130)">
+    <rect x="0" y="0" width="480" height="180" rx="15" fill="url(#objGrad)" filter="url(#shadow3)"/>
+    <text x="240" y="35" font-family="Georgia, serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold">Key Properties</text>
+    
+    <text x="30" y="70" font-family="Consolas, monospace" font-size="15" fill="#1a1a2e" font-weight="bold">event.target</text>
+    <text x="180" y="70" font-family="Georgia, serif" font-size="15" fill="#fff5e6">Element that triggered event</text>
+    
+    <text x="30" y="100" font-family="Consolas, monospace" font-size="15" fill="#1a1a2e" font-weight="bold">event.type</text>
+    <text x="165" y="100" font-family="Georgia, serif" font-size="15" fill="#fff5e6">Type of event ("click", etc.)</text>
+    
+    <text x="30" y="130" font-family="Consolas, monospace" font-size="15" fill="#1a1a2e" font-weight="bold">event.currentTarget</text>
+    <text x="240" y="130" font-family="Georgia, serif" font-size="15" fill="#fff5e6">Element with listener</text>
+    
+    <text x="30" y="160" font-family="Consolas, monospace" font-size="15" fill="#1a1a2e" font-weight="bold">event.preventDefault()</text>
+    <text x="265" y="160" font-family="Georgia, serif" font-size="15" fill="#fff5e6">Stop default behavior</text>
+  </g>
+  
+  <!-- Mouse Event Properties -->
+  <g transform="translate(60, 350)">
+    <rect x="0" y="0" width="350" height="260" rx="12" fill="#1a1a2e" stroke="#e94560" stroke-width="2" filter="url(#shadow3)"/>
+    <rect x="0" y="0" width="350" height="45" rx="12" fill="#e94560"/>
+    <rect x="0" y="25" width="350" height="20" fill="#e94560"/>
+    <text x="175" y="30" font-family="Georgia, serif" font-size="18" fill="white" text-anchor="middle" font-weight="bold">🖱️ Mouse Events</text>
+    
+    <text x="25" y="75" font-family="Consolas, monospace" font-size="14" fill="#e94560">event.clientX</text>
+    <text x="170" y="75" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">X in viewport</text>
+    
+    <text x="25" y="105" font-family="Consolas, monospace" font-size="14" fill="#e94560">event.clientY</text>
+    <text x="170" y="105" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Y in viewport</text>
+    
+    <text x="25" y="135" font-family="Consolas, monospace" font-size="14" fill="#e94560">event.pageX</text>
+    <text x="160" y="135" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">X in document</text>
+    
+    <text x="25" y="165" font-family="Consolas, monospace" font-size="14" fill="#e94560">event.pageY</text>
+    <text x="160" y="165" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Y in document</text>
+    
+    <text x="25" y="195" font-family="Consolas, monospace" font-size="14" fill="#e94560">event.button</text>
+    <text x="160" y="195" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Which button (0,1,2)</text>
+    
+    <text x="25" y="225" font-family="Consolas, monospace" font-size="14" fill="#e94560">event.shiftKey</text>
+    <text x="175" y="225" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Shift held? (bool)</text>
+  </g>
+  
+  <!-- Keyboard Event Properties -->
+  <g transform="translate(425, 350)">
+    <rect x="0" y="0" width="350" height="260" rx="12" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow3)"/>
+    <rect x="0" y="0" width="350" height="45" rx="12" fill="#4ecca3"/>
+    <rect x="0" y="25" width="350" height="20" fill="#4ecca3"/>
+    <text x="175" y="30" font-family="Georgia, serif" font-size="18" fill="#1a1a2e" text-anchor="middle" font-weight="bold">⌨️ Keyboard Events</text>
+    
+    <text x="25" y="75" font-family="Consolas, monospace" font-size="14" fill="#4ecca3">event.key</text>
+    <text x="140" y="75" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Key value ("a", "Enter")</text>
+    
+    <text x="25" y="105" font-family="Consolas, monospace" font-size="14" fill="#4ecca3">event.code</text>
+    <text x="145" y="105" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Physical key ("KeyA")</text>
+    
+    <text x="25" y="135" font-family="Consolas, monospace" font-size="14" fill="#4ecca3">event.ctrlKey</text>
+    <text x="165" y="135" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Ctrl held? (boolean)</text>
+    
+    <text x="25" y="165" font-family="Consolas, monospace" font-size="14" fill="#4ecca3">event.altKey</text>
+    <text x="160" y="165" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Alt held? (boolean)</text>
+    
+    <text x="25" y="195" font-family="Consolas, monospace" font-size="14" fill="#4ecca3">event.metaKey</text>
+    <text x="175" y="195" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Cmd/Win held?</text>
+    
+    <text x="25" y="225" font-family="Consolas, monospace" font-size="14" fill="#4ecca3">event.repeat</text>
+    <text x="160" y="225" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Key held down?</text>
+  </g>
+  
+  <!-- Form Event Properties -->
+  <g transform="translate(790, 350)">
+    <rect x="0" y="0" width="350" height="260" rx="12" fill="#1a1a2e" stroke="#7b68ee" stroke-width="2" filter="url(#shadow3)"/>
+    <rect x="0" y="0" width="350" height="45" rx="12" fill="#7b68ee"/>
+    <rect x="0" y="25" width="350" height="20" fill="#7b68ee"/>
+    <text x="175" y="30" font-family="Georgia, serif" font-size="18" fill="white" text-anchor="middle" font-weight="bold">📝 Form Events</text>
+    
+    <text x="25" y="75" font-family="Consolas, monospace" font-size="14" fill="#7b68ee">event.target.value</text>
+    <text x="200" y="75" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Input's value</text>
+    
+    <text x="25" y="105" font-family="Consolas, monospace" font-size="14" fill="#7b68ee">event.target.checked</text>
+    <text x="215" y="105" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Checkbox state</text>
+    
+    <text x="25" y="135" font-family="Consolas, monospace" font-size="14" fill="#7b68ee">event.target.name</text>
+    <text x="200" y="135" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Input's name</text>
+    
+    <text x="25" y="165" font-family="Consolas, monospace" font-size="14" fill="#7b68ee">event.submitter</text>
+    <text x="185" y="165" font-family="Georgia, serif" font-size="14" fill="#ccd6f6">Submit button</text>
+    
+    <line x1="25" y1="185" x2="325" y2="185" stroke="#2d2d44" stroke-width="1"/>
+    
+    <text x="175" y="215" font-family="Georgia, serif" font-size="13" fill="#8892b0" text-anchor="middle" font-style="italic">Always use preventDefault()</text>
+    <text x="175" y="235" font-family="Georgia, serif" font-size="13" fill="#8892b0" text-anchor="middle" font-style="italic">on form submit events!</text>
+  </g>
+  
+  <!-- preventDefault Example -->
+  <g transform="translate(60, 640)">
+    <rect x="0" y="0" width="540" height="220" rx="12" fill="#1a1a2e" stroke="#ffc107" stroke-width="2" filter="url(#shadow3)"/>
+    <rect x="0" y="0" width="540" height="45" rx="12" fill="#ffc107"/>
+    <rect x="0" y="25" width="540" height="20" fill="#ffc107"/>
+    <text x="270" y="30" font-family="Georgia, serif" font-size="18" fill="#1a1a2e" text-anchor="middle" font-weight="bold">preventDefault() in Action</text>
+    
+    <text x="25" y="75" font-family="Consolas, monospace" font-size="14" fill="#8892b0">// Stop form from submitting &amp; refreshing page</text>
+    <text x="25" y="100" font-family="Consolas, monospace" font-size="14" fill="#89ddff">form</text>
+    <text x="65" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">.</text>
+    <text x="75" y="100" font-family="Consolas, monospace" font-size="14" fill="#ffc107">addEventListener</text>
+    <text x="225" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">(</text>
+    <text x="235" y="100" font-family="Consolas, monospace" font-size="14" fill="#c3e88d">'submit'</text>
+    <text x="315" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">,</text>
+    <text x="330" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">(</text>
+    <text x="340" y="100" font-family="Consolas, monospace" font-size="14" fill="#ff9f43">e</text>
+    <text x="355" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">)</text>
+    <text x="368" y="100" font-family="Consolas, monospace" font-size="14" fill="#89ddff">=&gt;</text>
+    <text x="395" y="100" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">{</text>
+    
+    <text x="45" y="125" font-family="Consolas, monospace" font-size="14" fill="#ff9f43">e</text>
+    <text x="55" y="125" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">.</text>
+    <text x="65" y="125" font-family="Consolas, monospace" font-size="14" fill="#82aaff">preventDefault</text>
+    <text x="185" y="125" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">();</text>
+    <text x="220" y="125" font-family="Consolas, monospace" font-size="14" fill="#8892b0">// Stop the refresh!</text>
+    
+    <text x="45" y="155" font-family="Consolas, monospace" font-size="14" fill="#8892b0">// Now handle the form data with JS</text>
+    <text x="45" y="180" font-family="Consolas, monospace" font-size="14" fill="#c792ea">const</text>
+    <text x="95" y="180" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">data =</text>
+    <text x="155" y="180" font-family="Consolas, monospace" font-size="14" fill="#c792ea">new</text>
+    <text x="190" y="180" font-family="Consolas, monospace" font-size="14" fill="#82aaff">FormData</text>
+    <text x="275" y="180" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">(</text>
+    <text x="285" y="180" font-family="Consolas, monospace" font-size="14" fill="#ff9f43">e</text>
+    <text x="295" y="180" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">.</text>
+    <text x="305" y="180" font-family="Consolas, monospace" font-size="14" fill="#89ddff">target</text>
+    <text x="360" y="180" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">);</text>
+    
+    <text x="25" y="205" font-family="Consolas, monospace" font-size="14" fill="#ccd6f6">});</text>
+  </g>
+  
+  <!-- Pro Tips -->
+  <g transform="translate(620, 640)">
+    <rect x="0" y="0" width="520" height="220" rx="12" fill="#1a1a2e" stroke="#4ecca3" stroke-width="2" filter="url(#shadow3)"/>
+    <text x="260" y="35" font-family="Georgia, serif" font-size="20" fill="#4ecca3" text-anchor="middle" font-weight="bold">💡 Pro Tips</text>
+    <line x1="40" y1="50" x2="480" y2="50" stroke="#4ecca3" stroke-width="1" opacity="0.3"/>
+    
+    <circle cx="45" cy="80" r="6" fill="#4ecca3"/>
+    <text x="65" y="85" font-family="Georgia, serif" font-size="15" fill="#ccd6f6">Use</text>
+    <text x="100" y="85" font-family="Consolas, monospace" font-size="15" fill="#ff9f43">console.log(event)</text>
+    <text x="300" y="85" font-family="Georgia, serif" font-size="15" fill="#ccd6f6">to explore!</text>
+    
+    <circle cx="45" cy="115" r="6" fill="#4ecca3"/>
+    <text x="65" y="120" font-family="Consolas, monospace" font-size="15" fill="#ff9f43">event.target</text>
+    <text x="195" y="120" font-family="Georgia, serif" font-size="15" fill="#ccd6f6">is the MOST useful property</text>
+    
+    <circle cx="45" cy="150" r="6" fill="#4ecca3"/>
+    <text x="65" y="155" font-family="Georgia, serif" font-size="15" fill="#ccd6f6">Different events have different properties</text>
+    
+    <circle cx="45" cy="185" r="6" fill="#4ecca3"/>
+    <text x="65" y="190" font-family="Georgia, serif" font-size="15" fill="#ccd6f6">Browser DevTools shows event details on hover</text>
+  </g>
+</svg>
